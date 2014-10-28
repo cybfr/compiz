@@ -5,6 +5,7 @@
 #export DH_VERBOSE=1
 export COMPIZ_DEB_BUILD=1
 DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 gles2_architectures := armel armhf
 
 CORE_ABIVERSION := $(shell sed -rn 's/^\#define[[:space:]]+CORE_ABIVERSION[[:space:]]+//p' include/core/abiversion.h )
@@ -33,7 +34,7 @@ override_dh_auto_configure:
 	LDFLAGS=$(shell echo $$LDFLAGS | sed -e 's/\-Wl,-Bsymbolic-functions //')
 
         # right now, xorg-gtest won't compile on arm.
-ifeq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH), $(gles2_architectures)))
+ifeq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH), $(gles3_architectures)))
 	dh_auto_configure -- -DCOMPIZ_BUILD_WITH_RPATH=FALSE -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCOMPIZ_PACKAGING_ENABLED=TRUE -DUSE_GSETTINGS=ON -DCOMPIZ_DISABLE_GS_SCHEMAS_INSTALL=OFF -DCOMPIZ_DISABLE_PLUGIN_KDE=ON -DCOMPIZ_BUILD_TESTING=OFF -DUSE_KDE4=OFF -DBUILD_GLES=ON -DBUILD_XORG_GTEST=OFF
 else
 	dh_auto_configure -- -DCOMPIZ_BUILD_WITH_RPATH=FALSE -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCOMPIZ_PACKAGING_ENABLED=TRUE -DUSE_GSETTINGS=ON -DCOMPIZ_DISABLE_GS_SCHEMAS_INSTALL=OFF -DCOMPIZ_DISABLE_PLUGIN_KDE=ON -DCOMPIZ_BUILD_TESTING=OFF -DUSE_KDE4=OFF
@@ -56,7 +57,7 @@ else
 endif
 
 	# remove .a files
-	rm -f debian/tmp/usr/lib/*.a
+	rm -f debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/*.a
 
         # remove acceptance test binary
 	rm -f debian/tmp/usr/bin/compiz_autopilot_acceptance_tests

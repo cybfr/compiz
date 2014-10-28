@@ -1,2 +1,2 @@
 compiz: no-debconf-templates
-compiz: postinst-does-not-load-confmodule
+#compiz: postinst-does-not-load-confmodule

@@ -7,6 +7,7 @@ Uploaders: Jean-Philippe Mengual <texou@accelibreinfo.eu>,
 	   Samuel Thibault <sthibault@debian.org>
 Build-Depends: cmake (>= 2.6),
                debhelper (>= 9~),
+               dh-exec (>=0.3),
                intltool,
                libtool,
                pkg-config,
@@ -62,6 +63,8 @@ Vcs-Bzr: https://code.launchpad.net/~compiz-team/compiz/0.9.10
 Package: compiz
 Architecture: all
 Provides: x-window-manager
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: compiz-core (>= ${source:Version}),
          compiz-plugins-default (>= ${source:Version}),
          compiz-gnome,
@@ -78,6 +81,8 @@ Description: OpenGL window and compositing manager
 
 Package: compiz-core
 Architecture: any
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends},
 Recommends: compiz-plugins-default,
@@ -97,6 +102,8 @@ Description: OpenGL window and compositing manager
 
 Package: compiz-dev
 Architecture: any
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: compiz-core (= ${binary:Version}),
          libdecoration0-dev (= ${binary:Version}),
          ${misc:Depends},
@@ -136,6 +143,8 @@ Description: OpenGL window and compositing manager - development files
 
 Package: compiz-gnome
 Architecture: any
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          compiz-plugins-default (= ${binary:Version}),
@@ -159,6 +168,8 @@ Description: OpenGL window and compositing manager - GNOME window decorator
 
 Package: compiz-plugins-default
 Architecture: any
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: compiz-core (= ${binary:Version}),
          libdecoration0 (= ${binary:Version}),
          ${shlibs:Depends},
@@ -177,6 +188,8 @@ Description: OpenGL window and compositing manager - default plugins
 
 Package: compiz-plugins
 Architecture: any
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: compiz-core (= ${binary:Version}),
          compiz-plugins-default (= ${binary:Version}),
          ${shlibs:Depends},
@@ -198,6 +211,8 @@ Description: OpenGL window and compositing manager - plugins
 
 Package: libdecoration0
 Architecture: any
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends},
 Description: Compiz window decoration library
@@ -208,6 +223,8 @@ Description: Compiz window decoration library
 Package: libdecoration0-dev
 Section: libdevel
 Architecture: any
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: libdecoration0 (= ${binary:Version}),
          ${misc:Depends},
          libx11-dev,
@@ -222,6 +239,8 @@ Description: Compiz window decoration library - development files
 
 Package: libcompizconfig0
 Architecture: any
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          compiz-core (= ${binary:Version}),
@@ -236,6 +255,8 @@ Description: Settings library for plugins - OpenCompositing Project
 Package: libcompizconfig0-dev
 Architecture: any
 Section: libdevel
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends},
          libcompizconfig0 (= ${binary:Version}),
          compiz-dev,
@@ -251,6 +272,8 @@ Description: Development file for plugin settings - OpenCompositing Project
 Package: python-compizconfig
 Architecture: any
 Section: python
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends}, ${python:Depends}, ${shlibs:Depends}
 Provides: ${python:Provides}
 Description: Compizconfig bindings for python
@@ -265,6 +288,8 @@ Description: Compizconfig bindings for python
 Package: compizconfig-settings-manager
 Architecture: all
 XB-Python-Version: ${python:Versions}
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          ${python:Depends},
@@ -278,6 +303,8 @@ Description: Compiz configuration settings manager
  This package contains the compizconfig settings manager.
 
 Package: compiz-plugins-main
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: compiz-plugins, ${misc:Depends}
 Architecture: all
 Section: oldlibs
@@ -286,6 +313,8 @@ Description: transitional dummy package.
  after the upgrade.
 
 Package: compiz-plugins-main-default
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: compiz-plugins-default, ${misc:Depends}
 Architecture: all
 Section: oldlibs
@@ -294,6 +323,8 @@ Description: transitional dummy package.
  after the upgrade.
 
 Package: compiz-plugins-main-dev
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: compiz-dev, ${misc:Depends}
 Architecture: all
 Section: oldlibs
@@ -302,6 +333,8 @@ Description: transitional dummy package.
  after the upgrade.
 
 Package: compiz-plugins-extra
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: compiz-plugins, ${misc:Depends}
 Architecture: all
 Section: oldlibs
@@ -310,6 +343,8 @@ Description: transitional dummy package.
  after the upgrade.
 
 Package: compizconfig-backend-gconf
+Multi-Arch:
+Pre-Depends: ${misc:Pre-Depends}
 Depends: compiz-gnome, gconf2, ${misc:Depends}
 Architecture: all
 Section: oldlibs

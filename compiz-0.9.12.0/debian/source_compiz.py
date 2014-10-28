@@ -1,11 +1,13 @@
+import commands
 import apport.packaging
 from apport.hookutils import *
 
 def add_info(report, ui):
-
+    # get the $DEB_HOST_MULTIARCH variable from sys
+    multiarch_var = commands.getoutput("dpkg-architecture -qDEB_HOST_MULTIARCH")
     # if it's a stacktrace, report it directly against the right component
     if "Stacktrace" in report:
-        for external_component in ("/usr/lib/libnux", "/usr/lib/compiz/libunityshell", "/usr/lib/libunity"):
+        for external_component in ("/usr/lib/%s/libnux" %multiarch_var, "/usr/lib/%s/compiz/libunityshell" %multiarch_var, "/usr/lib/%s/libunity" %multiarch_var):
             for words in report["Stacktrace"].split():
                 if words.startswith(external_component):
                     report.add_package_info(apport.packaging.get_file_package(words))
